@@ -4,7 +4,7 @@
  * main - Entry point
  *
  * Description: Prints a quote to the standard error
- * without using printf or puts.
+ * without using forbidden functions
  *
  * Return: Always 1 (Failure)
  */
