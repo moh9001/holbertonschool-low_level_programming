@@ -2,31 +2,37 @@
 #include <time.h>
 #include <stdio.h>
 
-/*
+/**
  * main - Entry point
  *
- * Description This program is to demonstrate the if function logic
+ * Description: This program generates a random number,
+ * extracts its last digit, and prints whether it's greater
+ * than 5, equal to 0, or less than 6 and not 0.
  *
- * Return always 0 (Success)
+ * Return: Always 0 (Success)
  */
-
 int main(void)
 {
-	int n;
+	int n, last_digit;
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
-	if (n > 5)
+	last_digit = n % 10; /* Extract last digit */
+
+	printf("Last digit of %d is %d ", n, last_digit);
+
+	if (last_digit > 5)
 	{
-	printf("%d and is greater than 5\n", n);
+	printf("and is greater than 5\n");
 	}
-	else if (n == 0)
+	else if (last_digit == 0)
 	{
-	printf("%d and is 0\n", n);
+	printf("and is 0\n");
 	}
 	else
 	{
-	printf("%d and is less than 6 and not 0\n", n);
+	printf("and is less than 6 and not 0\n");
 	}
+
 	return (0);
 }
