@@ -14,4 +14,5 @@ void jack_bauer(void); /*Convert time from 00:00 to 23:59 */
 void times_table(void); /* prints the 9 time table */
 int add(int, int); /* adds two integers */
 void print_to_98(int n); /*Count numbers to 98*/
+void print_times_table(int n); /* prints the n times table */
 #endif /* MAIN_H */
