@@ -7,7 +7,7 @@ void	more_numbers(void)
 {
 	int	num;
 	int	line;
-	
+
 	line = 0;
 	while (line < 10)
 	{
