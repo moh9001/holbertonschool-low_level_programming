@@ -76,7 +76,10 @@ char *multiply(char *num1, char *num2)
 	/* Convert result array to string */
 	final_result = malloc(total_len + 1);
 	if (final_result == NULL)
+	{
+		free(result);
 		error();
+	}
 
 	j = 0;
 	for (i = 0; i < total_len; i++)
@@ -87,7 +90,7 @@ char *multiply(char *num1, char *num2)
 	}
 	final_result[j] = '\0';
 
-	free(result);
+	free(result); /* ✅ FIX: Free allocated memory before returning */
 	return (final_result);
 }
 
@@ -107,6 +110,6 @@ int main(int argc, char *argv[])
 
 	result = multiply(argv[1], argv[2]);
 	printf("%s\n", result);
-	free(result);
+	free(result); /* ✅ FIX: Ensure final result is freed */
 	return (0);
 }
