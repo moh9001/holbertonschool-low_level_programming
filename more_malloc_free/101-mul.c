@@ -36,9 +36,15 @@ int _strlen(char *s)
 
 /**
  * error - Prints error message and exits with status 98
+ * @ptr1: First pointer to free (can be NULL)
+ * @ptr2: Second pointer to free (can be NULL)
  */
-void error(void)
+void error(void *ptr1, void *ptr2)
 {
+	if (ptr1)
+		free(ptr1);
+	if (ptr2)
+		free(ptr2);
 	printf("Error\n");
 	exit(98);
 }
@@ -57,8 +63,8 @@ char *multiply(char *num1, char *num2)
 	char *final_result;
 
 	result = calloc(total_len, sizeof(int));
-	if (result == NULL)
-		error();
+	if (!result)
+		error(NULL, NULL);
 
 	/* Perform multiplication */
 	for (i = len1 - 1; i >= 0; i--)
@@ -75,11 +81,8 @@ char *multiply(char *num1, char *num2)
 
 	/* Convert result array to string */
 	final_result = malloc(total_len + 1);
-	if (final_result == NULL)
-	{
-		free(result);
-		error();
-	}
+	if (!final_result)
+		error(result, NULL);
 
 	j = 0;
 	for (i = 0; i < total_len; i++)
@@ -90,7 +93,7 @@ char *multiply(char *num1, char *num2)
 	}
 	final_result[j] = '\0';
 
-	free(result); /* ✅ FIX: Free allocated memory before returning */
+	free(result); /* ✅ Free allocated memory before returning */
 	return (final_result);
 }
 
@@ -106,10 +109,10 @@ int main(int argc, char *argv[])
 	char *result;
 
 	if (argc != 3 || !is_digit(argv[1]) || !is_digit(argv[2]))
-		error();
+		error(NULL, NULL);
 
 	result = multiply(argv[1], argv[2]);
 	printf("%s\n", result);
-	free(result); /* ✅ FIX: Ensure final result is freed */
+	free(result); /* ✅ Free the final result string */
 	return (0);
 }
