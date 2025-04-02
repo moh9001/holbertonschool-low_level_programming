@@ -1,6 +1,13 @@
 #include <stdlib.h>
 #include "lists.h"
 
+/**
+ * _strlen - calculates the length of a string
+ * @s: pointer to the string
+ *
+ * Return: length of the string (number of characters before '\0')
+ */
+
 unsigned int _strlen(const char *s)
 {
 	unsigned int len = 0;
@@ -10,6 +17,14 @@ unsigned int _strlen(const char *s)
 
 	return (len);
 }
+
+/**
+ * _strdup - duplicates a string by allocating new memory
+ * @str: pointer to the string to duplicate
+ *
+ * Return: pointer to the newly allocated duplicate string,
+ *         or NULL if allocation fails
+ */
 
 char *_strdup(const char *str)
 {
