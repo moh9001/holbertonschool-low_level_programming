@@ -40,17 +40,26 @@ int main(int ac, char **av)
 		exit(99);
 	}
 
-	while ((r_count = read(fd_from, buffer, BUFFER_SIZE)) > 0)
+	while ((r_count = read(fd_from, buffer, BUFFER_SIZE)) != 0)
 	{
-		w_count = write(fd_to, buffer, r_count);
-		if (w_count != r_count)
-		{
-			close_fd(fd_from);
-			close_fd(fd_to);
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
-			exit(99);
-		}
+	if (r_count == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
+		close_fd(fd_from);
+		close_fd(fd_to);
+		exit(98);
 	}
+
+	w_count = write(fd_to, buffer, r_count);
+	if (w_count == -1 || w_count != r_count)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]);
+		close_fd(fd_from);
+		close_fd(fd_to);
+		exit(99);
+	}
+	}
+
 	if (r_count == -1)
 	{
 		close_fd(fd_from);
