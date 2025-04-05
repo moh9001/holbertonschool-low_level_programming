@@ -40,8 +40,9 @@ int main(int ac, char **av)
 		exit(99);
 	}
 
-	while ((r_count = read(fd_from, buffer, BUFFER_SIZE)) != 0)
+	while (1)
 	{
+	r_count = read(fd_from, buffer, BUFFER_SIZE);
 	if (r_count == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]);
@@ -49,6 +50,8 @@ int main(int ac, char **av)
 		close_fd(fd_to);
 		exit(98);
 	}
+	if (r_count == 0)
+		break; /* End of file */
 
 	w_count = write(fd_to, buffer, r_count);
 	if (w_count == -1 || w_count != r_count)
